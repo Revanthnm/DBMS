@@ -1,0 +1,99 @@
+create table person(Driver_id varchar2(10),Pname VARCHAR2(20),Address varchar2(15),PRIMARY KEY (Driver_id));
+
+	Table PERSON created.
+
+create table car(regno varchar2(10),Cmodel VARCHAR2(20),lyear NUMBER(4),PRIMARY KEY (regno));
+
+	Table CAR created.
+
+create table accident(report_no varchar2(10),Adate date,ALocation varchar2(15),PRIMARY KEY (report_no));
+
+	Table ACCIDENT created.
+
+create table owns(Driver_id varchar2(10),regno varchar2(10),PRIMARY KEY (Driver_id,regno),foreign key (Driver_id)REFERENCES person(Driver_id),foreign key (regno)REFERENCES car(regno));
+
+	Table OWNS created.
+
+create table participated(Driver_id varchar2(10),regno varchar2(10),report_no varchar2(10),damage_amt number(7,2),PRIMARY KEY (Driver_id,regno,report_no),foreign key (Driver_id,regno)REFERENCES owns(Driver_id,regno)on delete CASCADE,foreign key (report_no)REFERENCES accident(report_no)on delete CASCADE);
+
+	Table PARTICIPATED created.
+
+insert into PERSON (Driver_id,Pname ,Address) VALUES('1111','ramu','K.S.Layout');
+insert into PERSON (Driver_id,Pname ,Address) VALUES('1112','Jhon','basavangudi');
+insert into PERSON (Driver_id,Pname ,Address) VALUES('1113','vinay','Lakhisarai');
+insert into PERSON (Driver_id,Pname ,Address) VALUES('1114','raghav','unknown village');
+insert into PERSON (Driver_id,Pname ,Address) VALUES('1115','sanjeev','ashyana nagar');
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+insert into CAR (regno ,Cmodel ,lyear ) VALUES('KA04Q2301',' MARUTHI-DX',' 2000');
+insert into  CAR (regno ,Cmodel ,lyear ) VALUES('KA05P1000',' FORDICON',' 2000');
+insert into  CAR (regno ,Cmodel ,lyear ) VALUES('KA03L1234',' ZEN-VXI',' 1999');
+insert into  CAR (regno ,Cmodel ,lyear ) VALUES('KA03L9999',' MARUTH-DX',' 2002');
+insert into  CAR (regno ,Cmodel ,lyear ) VALUES('KA01P4020',' INDICA-VX',' 2002');
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+insert into accident(report_no ,Adate ,ALocation ) VALUES('12',' 01-JUN-02',' M G ROAD');
+insert into  accident(report_no ,Adate ,ALocation ) VALUES('200',' 10-DEC-02',' DOUBLEROA');
+insert into accident(report_no ,Adate ,ALocation )VALUES('300',' 23-JUL-99',' M G ROAD');
+insert into accident(report_no ,Adate ,ALocation ) VALUES('25000',' 11-JUN-00',' RESIDENCY ROAD');
+insert into  accident(report_no ,Adate ,ALocation ) VALUES('26500',' 16-OCT-01 ','RICHMOND ROAD');
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+insert into owns (DRIVER_ID,regno) VALUES('1111','KA04Q2301');
+insert into  owns(Driver_id ,regno ) VALUES('1112','KA05P1000');
+insert into  owns(Driver_id ,regno ) VALUES('1113','KA03L1234');
+insert into owns(Driver_id ,regno ) VALUES('1114','KA03L9999');
+insert into  owns(Driver_id ,regno ) VALUES('1115','KA01P4020');
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+insert into  participated(DRIVER_ID,regno,report_no,damage_amt) VALUES('1111','KA04Q2301','12','20000');
+insert into  participated(DRIVER_ID,regno,report_no,damage_amt) VALUES('1112','KA05P1000','200','500');
+insert into  participated(DRIVER_ID,regno,report_no,damage_amt) VALUES('1113','KA03L1234','300','10000');
+insert into participated(DRIVER_ID,regno,report_no,damage_amt) VALUES('1114','KA03L9999','25000','2375');
+insert into  participated(DRIVER_ID,regno,report_no,damage_amt) VALUES('1115','KA01P4020','26500','70000');
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
+
+1 row inserted.
